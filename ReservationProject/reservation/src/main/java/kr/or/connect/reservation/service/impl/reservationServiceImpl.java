@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.connect.reservation.dao.CategoriesDao;
+import kr.or.connect.reservation.dao.DisplayInfosDao;
 import kr.or.connect.reservation.dto.Categories;
+import kr.or.connect.reservation.dto.Displayinfos;
 import kr.or.connect.reservation.service.reservationService;
 
 @Service
@@ -15,6 +17,8 @@ public class reservationServiceImpl implements reservationService {
 
 	@Autowired
 	CategoriesDao categoriesDao;
+	@Autowired
+	DisplayInfosDao displayInfosDao;
 	
 	@Override
 	@Transactional
@@ -24,9 +28,13 @@ public class reservationServiceImpl implements reservationService {
 	}
 
 	@Override
-	public int getCategoriesCount() {
-		
+	public List<Displayinfos> getDisplayInfos() {
+		List<Displayinfos> list = displayInfosDao.selectAll();
+		return list;
+	}
+	
+	@Override
+	public int getCategoriesCount() {	
 		return categoriesDao.getCategoriesCount();
 	}
-
 }
