@@ -3,11 +3,14 @@ package kr.or.connect.guestbook.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +25,22 @@ public class GuestbookController {
 	GuestbookService guestbookService;
 	
 	@GetMapping(path="/list")
-	public String list(@RequestParam(name = "start", required=false, defaultValue = "0") int start, Model model) {
+	public String list(@RequestParam(name = "start", required=false, defaultValue = "0") int start, Model model,
+			@CookieValue(value = "count", defaultValue="0", required=true) String value,
+			HttpServletResponse response) {
+		
+		try {
+			int i = Integer.parseInt(value);
+			value = Integer.toString(++i);
+		}catch (Exception e) {
+			value = "1";
+		}
+		
+		Cookie cookie = new Cookie("count", value);
+		cookie.setMaxAge(60*60*24*365);
+		cookie.setPath("/");
+		response.addCookie(cookie);
+		
 		List<Guestbook> list = guestbookService.getGuestbooks(start);
 		
 		int count = guestbookService.getCount();
@@ -40,6 +58,7 @@ public class GuestbookController {
 		model.addAttribute("list", list);
 		model.addAttribute("count", count);
 		model.addAttribute("pageStartList", pageStartList);
+		model.addAttribute("cookieCount", value);
 		
 		return "list";
 	}

@@ -22,7 +22,7 @@ import kr.or.connect.guestbook.dto.Guestbook;
 import kr.or.connect.guestbook.service.GuestbookService;
 
 @RestController
-@RequestMapping(path="/guestbooks")
+@RequestMapping(path="/api/guestbooks")
 public class GuestbookApiController {
 	@Autowired
 	GuestbookService guestbookService;
