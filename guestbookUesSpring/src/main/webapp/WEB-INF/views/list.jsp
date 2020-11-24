@@ -14,19 +14,21 @@
 	<br>
 	<br>
 
+	<br>
 	<c:forEach items="${list}" var="guestbook">
 
 ${guestbook.id }<br>
 ${guestbook.name }<br>
 ${guestbook.content }<br>
 ${guestbook.regdate }<br>
-
+<c:if test="${sessionScope.isAdmin == 'true'}"><a href="delete?id=${guestbook.id }">삭제</a></c:if>
+	<br>
 	</c:forEach>
 	<br>
 
 	<c:forEach items="${pageStartList}" var="pageIndex" varStatus="status">
-		<a href="list?start=${pageIndex}">${status.index +1 }</a>&nbsp; &nbsp;
-</c:forEach>
+	<a href="list?start=${pageIndex}">${status.index +1 }</a>&nbsp; &nbsp;
+	</c:forEach>
 
 	<br>
 	<br>
