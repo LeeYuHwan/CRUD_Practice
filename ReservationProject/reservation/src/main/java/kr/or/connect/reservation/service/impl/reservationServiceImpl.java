@@ -1,5 +1,6 @@
 package kr.or.connect.reservation.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.or.connect.reservation.dao.CategoriesDao;
 import kr.or.connect.reservation.dao.DisplayInfosDao;
 import kr.or.connect.reservation.dao.PromotionsDao;
+import kr.or.connect.reservation.dao.ReservationDao;
 import kr.or.connect.reservation.dto.Categories;
 import kr.or.connect.reservation.dto.DisplayinfoImage;
 import kr.or.connect.reservation.dto.Displayinfos;
@@ -17,6 +19,7 @@ import kr.or.connect.reservation.dto.ProductPrice;
 import kr.or.connect.reservation.dto.Promotions;
 import kr.or.connect.reservation.dto.ReservationUserComment;
 import kr.or.connect.reservation.dto.ReservationUserCommentImage;
+import kr.or.connect.reservation.dto.Reservationinfos;
 import kr.or.connect.reservation.service.reservationService;
 
 @Service
@@ -28,6 +31,8 @@ public class reservationServiceImpl implements reservationService {
 	DisplayInfosDao displayInfosDao;
 	@Autowired
 	PromotionsDao promotionsDao;
+	@Autowired
+	ReservationDao reservationDao;
 		
 	@Override
 	@Transactional
@@ -102,5 +107,16 @@ public class reservationServiceImpl implements reservationService {
 	public List<ReservationUserCommentImage> getReservationUserCommentImageChoice(int choiceId) {
 		List<ReservationUserCommentImage> list = displayInfosDao.reservationUserCommentImageChoice(choiceId);
 		return list;
+	}
+	
+	@Override
+	@Transactional(readOnly = false)
+	public Reservationinfos addGuestbook(Reservationinfos reservationinfos) {		
+		reservationinfos.setReservationDate(new Date());
+		reservationinfos.setCreateDate(new Date());
+		reservationinfos.setModifyDate(new Date());
+		Long id = reservationDao.insert(reservationinfos);
+				
+		return reservationinfos;
 	}
 }

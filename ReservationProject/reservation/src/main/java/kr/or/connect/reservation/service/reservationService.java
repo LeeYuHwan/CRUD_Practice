@@ -10,6 +10,7 @@ import kr.or.connect.reservation.dto.ProductPrice;
 import kr.or.connect.reservation.dto.Promotions;
 import kr.or.connect.reservation.dto.ReservationUserComment;
 import kr.or.connect.reservation.dto.ReservationUserCommentImage;
+import kr.or.connect.reservation.dto.Reservationinfos;
 
 public interface reservationService {
 	public List<Categories> getCategories();		
@@ -21,7 +22,9 @@ public interface reservationService {
 	public List<DisplayinfoImage> getDisplayinfoImageChoice(int choiceId);
 	public List<ProductImage> getProductImageChoice(int choiceId);
 	public List<ProductPrice> getProductPriceChoice(int choiceId);
+	public Reservationinfos addGuestbook(Reservationinfos reservationinfos);
 	
 	public int getCategoriesCount();
 	public int getPromotionsCount();
+	
 }
