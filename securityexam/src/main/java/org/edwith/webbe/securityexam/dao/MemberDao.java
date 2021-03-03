@@ -1,15 +1,17 @@
 package org.edwith.webbe.securityexam.dao;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.sql.DataSource;
-
 import org.edwith.webbe.securityexam.dto.Member;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+
+import javax.sql.DataSource;
+import java.util.HashMap;
+import java.util.Map;
 
 @Repository
 public class MemberDao {
@@ -29,5 +31,18 @@ public class MemberDao {
 		map.put("email", email);
 
 		return jdbc.queryForObject(MemberDaoSqls.SELECT_ALL_BY_EMAIL, map, rowMapper);
+	}
+
+	public void addMember(Member member) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("name", member.getName());
+		params.put("password", member.getPassword());
+		params.put("email", member.getEmail());
+		params.put("createDate", member.getCreateDate());
+		params.put("modifyDate", member.getModifyDate());
+		
+		// Insert Query를 위해서 update method를 사용했다.
+		jdbc.update(MemberDaoSqls.INSERT_MEMBER, params);
+		
 	}
 }

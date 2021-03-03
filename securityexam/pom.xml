@@ -47,22 +47,22 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
-        <!-- mysql jdbc driver -->
+        
+        <!-- MySQL Connection을 위한 JDBC Driver -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.19</version>
         </dependency>
-
-        <!-- 커넥션 풀 라이브러리를 추가한다. spring boot 2의 경우는 hikariCP가 기본으로 사용된다.-->
+        
+		<!-- 커넥션 풀 라이브러리를 추가한다. spring boot 2의 경우는 hikariCP가 기본으로 사용된다.-->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-dbcp2</artifactId>
             <version>2.6.0</version>
         </dependency>
-
-        <!-- DataSource, Transaction등을 사용하려면 추가한다. spring-tx를 자동으로 포함시킨다.-->
+        
+		<!-- DataSource, Transaction등을 사용하려면 추가한다. spring-tx를 자동으로 포함시킨다.-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
@@ -115,6 +115,7 @@
             <artifactId>spring-security-taglibs</artifactId>
             <version>${spring.version}</version>
         </dependency>
+
 
     </dependencies>
 

@@ -1,18 +1,20 @@
 package org.edwith.webbe.securityexam.dao;
 
-import static org.edwith.webbe.securityexam.dto.MemberRoleDaoSqls.SELECT_ALL_BY_EMAIL;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.sql.DataSource;
-
 import org.edwith.webbe.securityexam.dto.MemberRole;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+
+import javax.sql.DataSource;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Repository
 public class MemberRoleDao {
@@ -31,6 +33,16 @@ public class MemberRoleDao {
 		Map<String, Object> map = new HashMap<>();
 		map.put("email", email);
 
-		return jdbc.query(SELECT_ALL_BY_EMAIL, map, rowMapper);
+		return jdbc.query(MemberRoleDaoSqls.SELECT_ALL_BY_EMAIL, map, rowMapper);
+	}
+
+	public void addAdminRole(Long memberId) {
+		Map<String, Object> params = Collections.singletonMap("memberId", memberId);
+		jdbc.update(MemberRoleDaoSqls.INSERT_ADMIN_ROLE, params);
+	}
+
+	public void addUserRole(Long memberId) {
+		Map<String, Object> params = Collections.singletonMap("memberId", memberId);
+		jdbc.update(MemberRoleDaoSqls.INSERT_USER_ROLE, params);
 	}
 }

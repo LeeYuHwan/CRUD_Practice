@@ -1,7 +1,7 @@
 package org.edwith.webbe.securityexam.service.security;
 
 public class UserRoleEntity {
-	private String userLoginId;
+    private String userLoginId;
     private String roleName;
 
     public UserRoleEntity(String userLoginId, String roleName) {

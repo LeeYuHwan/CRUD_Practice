@@ -3,18 +3,18 @@ package org.edwith.webbe.securityexam.dto;
 import java.util.Date;
 
 public class Member {
-	private Long id;
+    private Long id;
     private String name;
     private String password;
     private String email;
     private Date createDate;
     private Date modifyDate;
-    
+
     public Member() {
         createDate = new Date();
         modifyDate = new Date();
     }
-    
+
     public Member(Long id, String name, String password, String email) {
         this();
         this.name = name;
@@ -54,7 +54,7 @@ public class Member {
         this.email = email;
     }
 
-    public Date getCreateDate() {
+	public Date getCreateDate() {
         return createDate;
     }
 
@@ -69,5 +69,10 @@ public class Member {
     public void setModifyDate(Date modifyDate) {
         this.modifyDate = modifyDate;
     }
+    
+    @Override
+	public String toString() {
+		return "Member [id=" + id + ", name=" + name + ", password=" + password + ", email=" + email + ", createDate="
+				+ createDate + ", modifyDate=" + modifyDate + "]";
+	}
 }
-
