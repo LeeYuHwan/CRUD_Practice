@@ -17,8 +17,9 @@
             <property name="hibernate.format_sql" value="true" />
             <property name="hibernate.use_sql_comments" value="true" />
             <property name="hibernate.id.new_generator_mappings" value="true" />
-
-            <!--<property name="hibernate.hbm2ddl.auto" value="create" />-->
+			
+			<!-- 엄청 위험한 옵션이므로 개발에서만 사용할 것(운영에서 절대 사용x) -->
+            <property name="hibernate.hbm2ddl.auto" value="create" />
         </properties>
     </persistence-unit>
 
