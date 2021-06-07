@@ -4,9 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 //다양한 매핑 어노테이션들
 //@Column
@@ -33,6 +36,15 @@ public class Member {
 	@Column(name = "USERNAME", nullable = false, length = 200)
 	private String name;
 	private int age;
+	
+	//fetch = FetchType.LAZY == 지연로딩 (권장)
+	//fetch = FetchType.EAGER == 전부가져옴 (꼭 필요할때만 사용)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "TEAM_ID")
+	private Team team;
+	
+	//@Column(name = "TEAM_ID")
+	//private Long teamId;
 	
 	//꼭 String으로 쓸것
 	@Enumerated(EnumType.STRING)
@@ -61,5 +73,17 @@ public class Member {
 	}
 	public void setMemberType(MemberType memberType) {
 		this.memberType = memberType;
+	}
+	/*public Long getTeamId() {
+		return teamId;
+	}
+	public void setTeamId(Long teamId) {
+		this.teamId = teamId;
+	}*/
+	public Team getTeam() {
+		return team;
+	}
+	public void setTeam(Team team) {
+		this.team = team;
 	}
 }
