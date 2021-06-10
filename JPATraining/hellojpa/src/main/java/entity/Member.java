@@ -39,8 +39,10 @@ public class Member {
 	
 	//fetch = FetchType.LAZY == 지연로딩 (권장)
 	//fetch = FetchType.EAGER == 전부가져옴 (꼭 필요할때만 사용)
+	//주인을 정하는 기준 : 외래키가 있는 곳을 주인으로 정함 이경우는 Member가 외래키가 있으므로 주인임
+	//연관관계 주인 = member 오직 연관관계 주인만이 외래키를 관리돼서 자동 업데이트가 수행됨
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TEAM_ID")
+	@JoinColumn(name = "TEAM_ID") 
 	private Team team;
 	
 	//@Column(name = "TEAM_ID")

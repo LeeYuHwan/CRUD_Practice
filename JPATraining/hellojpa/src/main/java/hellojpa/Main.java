@@ -33,11 +33,17 @@ public class Main {
 			member.setName("안녕하세요");
 			member.setAge(1);
 			//member.setTeamId(team.getId());
+			
+			//주인상태인 Member에게 setTeam을 해줘야 team id가 자동 업데이트됨
 			member.setTeam(team);
-			member.setMemberType(MemberType.ADMIN);
+			member.setMemberType(MemberType.ADMIN);			
 			
 			em.persist(member);
 			
+			//주인상태가 아닌 team에게 member를 add하면 team id가 자동 업데이트가 되지 않아 null값이 들어간다.
+			//team.getMembers().add(member);
+			//**순수한 객체 관계를 고려하면 항상 양쪽다 값을 입력해야 한다.
+					
 			//쿼리 보여줌
 			em.flush();
 			em.clear();
