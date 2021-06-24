@@ -31,7 +31,7 @@ public class Main {
 			//엔티티를 생성한 상태(비영속)
 			Member member = new Member();		
 			//member.setId(100L);
-			member.setName("안녕하세요");
+			member.setName("hello");
 			member.setAge(1);
 			//member.setTeamId(team.getId());
 			
@@ -42,6 +42,21 @@ public class Main {
 			//엔티티를 영속
 			//1차 캐시에 저장됨
 			em.persist(member);
+				
+			/*//jpql 검색
+			//fetch를 이용시 join의 효과를 얻을 수 있어 Team과 Member를 둘다 가져온다.
+			//역시나 fetch를 이용시 어떠한 sql을 사용하던 해당 sql에 맞춰서 알아서 join문이 짜여서 실행된다.
+			String jpql = "select m from m join fetch m.team where m.name like '%hello%'";
+			List<Member> result = em.createQuery(jpql, Member.class)
+					.setFirstResult(10)
+					.setMaxResults(20)
+					.getResultList();*/
+					
+			
+			//Named 쿼리 어노테이션
+			//@Entity
+			//@NamedQuery
+			//를 사용시 string으로 작성되어 잡기 어려운 sql버그를 캐치하기가 편하다.
 			
 			//주인상태가 아닌 team에게 member를 add하면 team id가 자동 업데이트가 되지 않아 null값이 들어간다.
 			//team.getMembers().add(member);
