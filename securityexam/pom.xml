@@ -52,7 +52,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.19</version>
+            <version>8.0.28</version>
         </dependency>
         
 		<!-- 커넥션 풀 라이브러리를 추가한다. spring boot 2의 경우는 hikariCP가 기본으로 사용된다.-->
